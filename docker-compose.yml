@@ -1,0 +1,17 @@
+version: '2'  # Docker Compose 2012 era
+
+services:
+  netmon:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/var/www/html/netmon
+      - ./config:/var/www/html/netmon/config
+      - ./data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=netmon2012
+      - MYSQL_DATABASE=network_monitoring
+      - MYSQL_USER=netmon
+      - MYSQL_PASSWORD=netmon123
+    privileged: true  # Needed for 2012 CentOS services
